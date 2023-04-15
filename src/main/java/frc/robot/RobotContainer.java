@@ -20,14 +20,14 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  
   // The robot's subsystems and commands are defined here...
   private final Drivetrain drivetrain = new Drivetrain();
 
-  // Xbox Remote
+  // Xbox Remote + Joystick + boolean for fun
   private final XboxController xboxController = new XboxController(0);
-
-  // Joystick Remote
   private final Joystick joystick = new Joystick(2);
+  private final Boolean usingXboxRemote = true;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -45,28 +45,28 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    drivetrain.setDefaultCommand(joystickArcadeDrive()); 
-
-    // Adds d-pad controls.
-    /*
-    new POVButton(xboxController, 0).onTrue(new POVDrive(drivetrain, "up"));    // Up
-    new POVButton(xboxController, 45).onTrue(new POVDrive(drivetrain, "upright"));   // Up-Right
-    new POVButton(xboxController, 90).onTrue(new POVDrive(drivetrain, "right"));   // Right
-    new POVButton(xboxController, 135).onTrue(new POVDrive(drivetrain, "downright"));  // Down-Right
-    new POVButton(xboxController, 180).onTrue(new POVDrive(drivetrain, "down"));  // Down
-    new POVButton(xboxController, 225).onTrue(new POVDrive(drivetrain, "downleft"));  // Down-Left
-    new POVButton(xboxController, 270).onTrue(new POVDrive(drivetrain, "left"));  // Left
-    new POVButton(xboxController, 315).onTrue(new POVDrive(drivetrain, "upleft"));  // Up-Left
-    */
-
-    new POVButton(joystick, 45).whileTrue(new UpRight(drivetrain));     // Up-Right
-    new POVButton(joystick, 135).whileTrue(new DownRight(drivetrain));  // Down-Right
-    new POVButton(joystick, 225).whileTrue(new DownLeft(drivetrain));   // Down-Left
-    new POVButton(joystick, 315).whileTrue(new UpLeft(drivetrain));     // Up-Left
-    new POVButton(joystick, 0).whileTrue(new Up(drivetrain));           // Up
-    new POVButton(joystick, 90).whileTrue(new Right(drivetrain));       // Right
-    new POVButton(joystick, 180).whileTrue(new Down(drivetrain));       // Down
-    new POVButton(joystick, 270).whileTrue(new Left(drivetrain));       // Left
+    // Adds d-pad controls and sets default command
+    if (usingXboxRemote){
+      drivetrain.setDefaultCommand(xboxArcadeDrive());
+      new POVButton(xboxController, 0).onTrue(new Up(drivetrain));            // Up
+      new POVButton(xboxController, 45).onTrue(new UpRight(drivetrain));      // Up-Right
+      new POVButton(xboxController, 90).onTrue(new Right(drivetrain));        // Right
+      new POVButton(xboxController, 135).onTrue(new DownRight(drivetrain));   // Down-Right
+      new POVButton(xboxController, 180).onTrue(new Down(drivetrain));        // Down
+      new POVButton(xboxController, 225).onTrue(new DownLeft(drivetrain));    // Down-Left
+      new POVButton(xboxController, 270).onTrue(new Left(drivetrain));        // Left
+      new POVButton(xboxController, 315).onTrue(new UpLeft(drivetrain));      // Up-Left
+    } else {
+      drivetrain.setDefaultCommand(joystickArcadeDrive());
+      new POVButton(joystick, 0).whileTrue(new Up(drivetrain));               // Up
+      new POVButton(joystick, 45).whileTrue(new UpRight(drivetrain));         // Up-Right
+      new POVButton(joystick, 90).whileTrue(new Right(drivetrain));           // Right
+      new POVButton(joystick, 135).whileTrue(new DownRight(drivetrain));      // Down-Right
+      new POVButton(joystick, 180).whileTrue(new Down(drivetrain));           // Down
+      new POVButton(joystick, 225).whileTrue(new DownLeft(drivetrain));       // Down-Left
+      new POVButton(joystick, 270).whileTrue(new Left(drivetrain));           // Left
+      new POVButton(joystick, 315).whileTrue(new UpLeft(drivetrain));         // Up-Left
+    }
   }
 
   /**
