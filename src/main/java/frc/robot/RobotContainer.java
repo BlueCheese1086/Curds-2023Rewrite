@@ -27,7 +27,7 @@ public class RobotContainer {
   // Xbox Remote + Joystick + boolean for fun
   private final XboxController xboxController = new XboxController(0);
   private final Joystick joystick = new Joystick(2);
-  private final Boolean usingXboxRemote = true;
+  private final Boolean usingXboxRemote = false;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
