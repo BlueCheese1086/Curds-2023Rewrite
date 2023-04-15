@@ -48,24 +48,24 @@ public class RobotContainer {
     // Adds d-pad controls and sets default command
     if (usingXboxRemote){
       drivetrain.setDefaultCommand(xboxArcadeDrive());
-      new POVButton(xboxController, 0).onTrue(new Up(drivetrain));           // Up
-      new POVButton(xboxController, 45).onTrue(new UpRight(drivetrain));     // Up-Right
-      new POVButton(xboxController, 90).onTrue(new Right(drivetrain));       // Right
-      new POVButton(xboxController, 135).onTrue(new DownRight(drivetrain));  // Down-Right
-      new POVButton(xboxController, 180).onTrue(new Down(drivetrain));       // Down
-      new POVButton(xboxController, 225).onTrue(new DownLeft(drivetrain));   // Down-Left
-      new POVButton(xboxController, 270).onTrue(new Left(drivetrain));       // Left
-      new POVButton(xboxController, 315).onTrue(new UpLeft(drivetrain));     // Up-Left
+      new POVButton(xboxController, 0).onTrue(new Up(drivetrain));            // Up
+      new POVButton(xboxController, 45).onTrue(new UpRight(drivetrain));      // Up-Right
+      new POVButton(xboxController, 90).onTrue(new Right(drivetrain));        // Right
+      new POVButton(xboxController, 135).onTrue(new DownRight(drivetrain));   // Down-Right
+      new POVButton(xboxController, 180).onTrue(new Down(drivetrain));        // Down
+      new POVButton(xboxController, 225).onTrue(new DownLeft(drivetrain));    // Down-Left
+      new POVButton(xboxController, 270).onTrue(new Left(drivetrain));        // Left
+      new POVButton(xboxController, 315).onTrue(new UpLeft(drivetrain));      // Up-Left
     } else {
       drivetrain.setDefaultCommand(joystickArcadeDrive());
-      new POVButton(joystick, 0).whileTrue(new Up(drivetrain));           // Up
-      new POVButton(joystick, 45).whileTrue(new UpRight(drivetrain));     // Up-Right
-      new POVButton(joystick, 90).whileTrue(new Right(drivetrain));       // Right
-      new POVButton(joystick, 135).whileTrue(new DownRight(drivetrain));  // Down-Right
-      new POVButton(joystick, 180).whileTrue(new Down(drivetrain));       // Down
-      new POVButton(joystick, 225).whileTrue(new DownLeft(drivetrain));   // Down-Left
-      new POVButton(joystick, 270).whileTrue(new Left(drivetrain));       // Left
-      new POVButton(joystick, 315).whileTrue(new UpLeft(drivetrain));     // Up-Left
+      new POVButton(joystick, 0).whileTrue(new Up(drivetrain));               // Up
+      new POVButton(joystick, 45).whileTrue(new UpRight(drivetrain));         // Up-Right
+      new POVButton(joystick, 90).whileTrue(new Right(drivetrain));           // Right
+      new POVButton(joystick, 135).whileTrue(new DownRight(drivetrain));      // Down-Right
+      new POVButton(joystick, 180).whileTrue(new Down(drivetrain));           // Down
+      new POVButton(joystick, 225).whileTrue(new DownLeft(drivetrain));       // Down-Left
+      new POVButton(joystick, 270).whileTrue(new Left(drivetrain));           // Left
+      new POVButton(joystick, 315).whileTrue(new UpLeft(drivetrain));         // Up-Left
     }
   }
 
