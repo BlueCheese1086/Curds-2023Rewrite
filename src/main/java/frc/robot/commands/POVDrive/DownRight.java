@@ -34,7 +34,7 @@ public class DownRight extends CommandBase {
     public void execute() {
         PIDController zero = new PIDController(1.02, 0.02, 0);
         double zeroed = zero.calculate(0);
-        drivetrain.povDrive(zeroed, 0.25, 0.25, zeroed);
+        drivetrain.povDrive(zeroed / 0.25, 1, 1, zeroed / 0.25);
         zero.close();
     }
 

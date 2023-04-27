@@ -88,6 +88,6 @@ public class RobotContainer {
    */
   public Command joystickArcadeDrive() {
     // An example command will be run in autonomous
-    return new ArcadeDrive(drivetrain, () -> -joystick.getRawAxis(1), () -> joystick.getRawAxis(4), Constants.squareInputs);
+    return new ArcadeDrive(drivetrain, () -> joystick.getRawAxis(1), () -> joystick.getRawAxis(4), Constants.squareInputs);
   }
 }

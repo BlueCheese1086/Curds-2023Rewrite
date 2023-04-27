@@ -15,5 +15,4 @@ package frc.robot;
 public final class Constants {
     public static final boolean squareInputs = false;
     public static final double deadband = 0.02;
-    public static final double maxOutput = 1.0;
 }
