@@ -50,7 +50,6 @@ public class RobotContainer {
    * @return the command to run in teleop
    */
   public Command getTeleopCommand() {
-    // An example command will be run in autonomous
     return new ArcadeDrive(drivetrain, () -> -joystick.getRawAxis(Constants.LeftY), () -> joystick.getRawAxis(Constants.RightX));
   }
 }
