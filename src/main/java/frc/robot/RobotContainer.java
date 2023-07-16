@@ -29,6 +29,8 @@ public class RobotContainer {
   // Joystick Remote
   private final Joystick joystick = new Joystick(2);
 
+  private final Boolean usingXboxRemote = false;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -88,6 +90,6 @@ public class RobotContainer {
    */
   public Command joystickArcadeDrive() {
     // An example command will be run in autonomous
-    return new ArcadeDrive(drivetrain, () -> -joystick.getRawAxis(1), () -> joystick.getRawAxis(4), Constants.squareInputs);
+    return new ArcadeDrive(drivetrain, () -> joystick.getRawAxis(1), () -> joystick.getRawAxis(4), Constants.squareInputs);
   }
 }

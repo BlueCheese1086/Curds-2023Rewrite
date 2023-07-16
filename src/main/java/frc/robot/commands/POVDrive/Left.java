@@ -31,7 +31,7 @@ public class Left extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        drivetrain.povDrive(0.25, -0.25, -0.25, 0.25);
+        drivetrain.povDrive(1, -1, -1, 1);
     }
 
     // Called once the command ends or is interrupted.
