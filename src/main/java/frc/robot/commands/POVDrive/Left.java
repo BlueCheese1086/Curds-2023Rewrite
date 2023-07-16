@@ -4,43 +4,40 @@
 
 package frc.robot.commands.POVDrive;
 
-import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/** An arcade drive command that uses a drivetrain. */
+import frc.robot.subsystems.Drivetrain;
+
 public class Left extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Drivetrain drivetrain;
 
     /**
-     * Creates a new POVDrive command.
+     * Creates a new Left command.
      *
      * @param subsystem The subsystem used by this command.
      */
     public Left(Drivetrain drivetrain) {
         this.drivetrain = drivetrain;
-
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(drivetrain);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {}
 
-    // Called every time the scheduler runs while the command is scheduled.
+    // Called every time the scheduler runs while the command is scheduled. (Approx 20 ms.)
     @Override
     public void execute() {
-        drivetrain.povDrive(1, -1, -1, 1);
+        drivetrain.setSpeeds(-1, 1, 1, -1);
     }
-
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {}
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
         return false;
     }
+
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {}
 }

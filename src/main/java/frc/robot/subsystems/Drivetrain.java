@@ -7,17 +7,17 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-import frc.robot.Constants;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
     private final TalonSRX frontLeft = new TalonSRX(1);
     private final TalonSRX frontRight = new TalonSRX(2);
     private final TalonSRX backLeft = new TalonSRX(3);
     private final TalonSRX backRight = new TalonSRX(4);
-    private final double maxSpeed = 0.25;
 
     /** Creates a new Drivetrain. */
     public Drivetrain() {
@@ -25,25 +25,21 @@ public class Drivetrain extends SubsystemBase {
         backLeft.setInverted(true);
     }
 
-    // Moves the robot with D-Pad input.
-    public void povDrive(double frontLeftSpeed, double frontRightSpeed, double backLeftSpeed, double backRightSpeed){
-        frontLeft.set(ControlMode.PercentOutput, frontLeftSpeed * maxSpeed);
-        frontRight.set(ControlMode.PercentOutput, frontRightSpeed * maxSpeed);
-        backLeft.set(ControlMode.PercentOutput, backLeftSpeed * maxSpeed);
-        backRight.set(ControlMode.PercentOutput, backRightSpeed * maxSpeed);
-    }
-
-    // Moves the robot with Joystick input.
-    public void arcadeDrive(double xSpeed, double zRotation, boolean squareInputs) {
-
+    // Takes input from a joystick and finds the speed each motor should go at.
+    public void arcadeDrive(double xSpeed, double zRotation) {
         xSpeed = MathUtil.applyDeadband(xSpeed, Constants.deadband);
         zRotation = MathUtil.applyDeadband(zRotation, Constants.deadband);
 
-        var speeds = DifferentialDrive.arcadeDriveIK(xSpeed, zRotation, squareInputs);
+        var speeds = DifferentialDrive.arcadeDriveIK(xSpeed, zRotation, Constants.squareInputs);
 
-        frontLeft.set(ControlMode.PercentOutput, speeds.left * maxSpeed);
-        frontRight.set(ControlMode.PercentOutput, speeds.right * maxSpeed);
-        backLeft.set(ControlMode.PercentOutput, speeds.left * maxSpeed);
-        backRight.set(ControlMode.PercentOutput, speeds.right * maxSpeed);
+        setSpeeds(speeds.left, speeds.right, speeds.left, speeds.right);
+    }
+
+    // Sets the speed of the robot.
+    public void setSpeeds(double frontLeftSpeed, double frontRightSpeed, double backLeftSpeed, double backRightSpeed){
+        frontLeft.set(ControlMode.PercentOutput, frontLeftSpeed * Constants.maxSpeed);
+        frontRight.set(ControlMode.PercentOutput, frontRightSpeed * Constants.maxSpeed);
+        backLeft.set(ControlMode.PercentOutput, backLeftSpeed * Constants.maxSpeed);
+        backRight.set(ControlMode.PercentOutput, backRightSpeed * Constants.maxSpeed);
     }
 }
