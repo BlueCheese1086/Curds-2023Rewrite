@@ -4,28 +4,28 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Drivetrain;
-import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/** An arcade drive command that uses a drivetrain. */
+import frc.robot.subsystems.Drivetrain;
+
+import java.util.function.Supplier;
+
 public class ArcadeDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain drivetrain;
   private final Supplier<Double> xAxisSpeed;
   private final Supplier<Double> zAxisRotate;
-  private final boolean squareInputs;
 
   /**
    * Creates a new ArcadeDrive command.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ArcadeDrive(Drivetrain drivetrain, Supplier<Double> xAxisSpeed, Supplier<Double> zAxisRotate, boolean squareInputs) {
+  public ArcadeDrive(Drivetrain drivetrain, Supplier<Double> xAxisSpeed, Supplier<Double> zAxisRotate) {
     this.drivetrain = drivetrain;
     this.xAxisSpeed = xAxisSpeed;
     this.zAxisRotate = zAxisRotate;
-    this.squareInputs = squareInputs;
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
   }
@@ -37,16 +37,16 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.arcadeDrive(xAxisSpeed.get(), zAxisRotate.get(), squareInputs);
+    drivetrain.arcadeDrive(xAxisSpeed.get(), zAxisRotate.get());
   }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
   }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {}
 }
