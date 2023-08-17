@@ -4,18 +4,17 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.Subsystems.Drivetrain.Drivetrain;
+import frc.robot.Subsystems.Drivetrain.Commands.ArcadeDrive;
+import frc.robot.Subsystems.Drivetrain.Commands.Autonomous.*;
+import frc.robot.Subsystems.Drivetrain.Commands.POVDrive.*;
 import edu.wpi.first.wpilibj2.command.Command;
-
-import frc.robot.Commands.ArcadeDrive;
-import frc.robot.Commands.Autonomous.Autonomous;
-import frc.robot.Commands.POVDrive.*;
 
 public class RobotContainer {
   Drivetrain drivetrain = new Drivetrain();
-
-  Joystick joystick = new Joystick(0);
+  XboxController xbox = new XboxController(0);
 
   public RobotContainer() {
     configureBindings();
@@ -24,14 +23,14 @@ public class RobotContainer {
   // This is where all of the buttons are bound to different commands.
   private void configureBindings() {
     // Allows the robot to be driven with the POV Controls on the joystick.
-    new POVButton(joystick, 0).whileTrue(new Up(drivetrain)); // Up
-    new POVButton(joystick, 45).whileTrue(new UpRight(drivetrain)); // Up-Right
-    new POVButton(joystick, 90).whileTrue(new Right(drivetrain)); // Right
-    new POVButton(joystick, 135).whileTrue(new DownRight(drivetrain)); // Down-Right
-    new POVButton(joystick, 180).whileTrue(new Down(drivetrain)); // Down
-    new POVButton(joystick, 225).whileTrue(new DownLeft(drivetrain)); // Down-Left
-    new POVButton(joystick, 270).whileTrue(new Left(drivetrain)); // Left
-    new POVButton(joystick, 315).whileTrue(new UpLeft(drivetrain)); // Up-Left
+    new POVButton(xbox, 0).whileTrue(new Up(drivetrain));           // Up
+    new POVButton(xbox, 45).whileTrue(new UpRight(drivetrain));     // Up-Right
+    new POVButton(xbox, 90).whileTrue(new Right(drivetrain));       // Right
+    new POVButton(xbox, 135).whileTrue(new DownRight(drivetrain));  // Down-Right
+    new POVButton(xbox, 180).whileTrue(new Down(drivetrain));       // Down
+    new POVButton(xbox, 225).whileTrue(new DownLeft(drivetrain));   // Down-Left
+    new POVButton(xbox, 270).whileTrue(new Left(drivetrain));       // Left
+    new POVButton(xbox, 315).whileTrue(new UpLeft(drivetrain));     // Up-Left
   }
 
   public Command getAutonomousCommand() {
@@ -39,6 +38,6 @@ public class RobotContainer {
   }
 
   public Command getTeleopCommand() {
-    return new ArcadeDrive(drivetrain, () -> -joystick.getRawAxis(1), () -> -joystick.getRawAxis(4));
+    return new ArcadeDrive(drivetrain, () -> -xbox.getLeftY(), () -> -xbox.getRightX());
   }
 }

@@ -1,11 +1,11 @@
-package frc.robot.Commands.Autonomous;
+package frc.robot.Subsystems.Drivetrain.Commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
-import frc.robot.Drivetrain;
+import frc.robot.Subsystems.Drivetrain.Drivetrain;
 
 public class MecanumTime extends CommandBase {
-    public enum Directions { // This makes the process of selecting a direction for the robot to go easier.
+    /** This makes the process of selecting a direction for the robot to go easier. */
+    public enum Directions {
         UP,
         UPRIGHT,
         RIGHT,
@@ -16,22 +16,29 @@ public class MecanumTime extends CommandBase {
         UPLEFT;
     }
 
+    private Drivetrain drivetrain;
     private double speed;
     private Directions direction;
-    private double start;
     private double end;
-    private Drivetrain drivetrain;
 
-    public MecanumTime(double speed, Directions direction, double seconds, Drivetrain drivetrain) {
+    /** Creates a new MecanumTime command.  This will move the robot in a certain direction at a set speed for a certain number of seconds.
+     * 
+     * @param drivetrain The subsystem this command will run on.
+     * @param speed The speed the robot will move at.
+     * @param direction The direction the robot will move.
+     * @param seconds How long the robot will move in seconds.
+     */
+    public MecanumTime(Drivetrain drivetrain, double speed, Directions direction, double seconds) {
+        this.drivetrain = drivetrain;
         this.speed = speed;
         this.direction = direction;
-        this.start = System.currentTimeMillis();
-        this.end = start + (seconds * 1000);
-        this.drivetrain = drivetrain;
+        this.end = System.currentTimeMillis() + (seconds * 1000);
+
+        addRequirements(drivetrain);
     }
 
     @Override
-    // This runs repeatedly while the command is scheduled.
+    /** Called every time the scheduler runs while the command is scheduled. */
     public void execute() {
         switch(direction) {
             case UP:
@@ -54,14 +61,14 @@ public class MecanumTime extends CommandBase {
     }
 
     @Override
-    // This runs once when the command ends.
+    /** Called once the command ends or is interrupted. */
     public void end(boolean interrupted) {
         drivetrain.drive(0, 0, 0, 0);
     }
 
     @Override
-    // This runs repeatedly while the command is scheduled.  It tells the program when the command should end.
+    /** Returns true when the command should end. */
     public boolean isFinished() {
-        return (start == end);
+        return (System.currentTimeMillis() == end);
     }
 }

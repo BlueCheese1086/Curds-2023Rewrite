@@ -1,8 +1,7 @@
-package frc.robot.Commands.POVDrive;
+package frc.robot.Subsystems.Drivetrain.Commands.POVDrive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
-import frc.robot.Drivetrain;
+import frc.robot.Subsystems.Drivetrain.Drivetrain;
 
 public class Up extends CommandBase {
     private Drivetrain drivetrain;
@@ -15,11 +14,5 @@ public class Up extends CommandBase {
     // This run repeatedly while the command is scheduled.
     public void execute() {
         drivetrain.drive(1, 1, 1, 1);
-    }
-
-    @Override
-    // This run repeatedly while the command is scheduled.  It tells the program when the command should end.
-    public boolean isFinished() {
-        return false;
     }
 }
