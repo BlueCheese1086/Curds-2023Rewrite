@@ -11,7 +11,7 @@ public class Constants {
     public class DriveConfig {
         public static final boolean squareInputs = true; // Whether or not to square the inputs in the Drivetrain file.
         public static final double deadband = 0.02; // The deadband for the controllers.
-        public static final double maxSpeed = 0.25; // The maximum output for the motors.
+        public static final double maxSpeed = 0.5; // The maximum output for the motors.
         public static final double radius = 0.25; // The radius of the wheels in feet.
     }
 }
